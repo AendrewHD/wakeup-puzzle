@@ -37,7 +37,9 @@ enum AlarmScheduler {
 
     private static func configuration(id: UUID, schedule: Alarm.Schedule)
         -> AlarmManager.AlarmConfiguration<WakeMetadata> {
-        let alert = AlarmPresentation.Alert(title: LocalizedStringResource("Wake up - solve the puzzle"))
+        let stop = AlarmButton(text: LocalizedStringResource("Stop"), textColor: .white, systemImageName: "stop.circle")
+        let alert = AlarmPresentation.Alert(title: LocalizedStringResource("Wake up - solve the puzzle"),
+                                            stopButton: stop)
         let attributes = AlarmAttributes(
             presentation: AlarmPresentation(alert: alert),
             metadata: WakeMetadata(),

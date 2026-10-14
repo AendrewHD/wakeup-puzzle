@@ -2,7 +2,9 @@ import SwiftUI
 
 /// Day 1: math puzzle only. More puzzle types and the eyes-open face check follow on later days.
 struct PuzzleView: View {
-    @State private var a = 0, b = 0, c = 0
+    @State private var a = 0
+    @State private var b = 0
+    @State private var c = 0
     @State private var answer = ""
     @State private var solved = 0
     @State private var wrong = false
