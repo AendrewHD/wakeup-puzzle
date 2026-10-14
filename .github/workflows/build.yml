@@ -1,0 +1,36 @@
+name: Build unsigned IPA
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: macos-26
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XcodeGen (generates the .xcodeproj from project.yml)
+        run: brew install xcodegen
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build (no signing, Sideloadly signs later)
+        run: |
+          xcodebuild -project WakeUp.xcodeproj -scheme WakeUp \
+            -configuration Release -sdk iphoneos -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY="" \
+            build
+
+      - name: Package IPA
+        run: |
+          mkdir Payload
+          cp -R build/Build/Products/Release-iphoneos/WakeUp.app Payload/
+          zip -r WakeUp.ipa Payload
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: WakeUp-ipa
+          path: WakeUp.ipa

@@ -1,0 +1,29 @@
+name: WakeUp
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: "26.0"
+settings:
+  base:
+    SWIFT_VERSION: "5.0"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+targets:
+  WakeUp:
+    type: application
+    platform: iOS
+    sources:
+      - App
+    info:
+      path: Config/Info.plist
+      properties:
+        CFBundleDisplayName: WakeUp Puzzle
+        NSAlarmKitUsageDescription: WakeUp Puzzle schedules the alarms you create.
+        NSCameraUsageDescription: The camera checks that your eyes are open to dismiss the alarm.
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations:
+          - UIInterfaceOrientationPortrait
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.wakeuppuzzle
+        TARGETED_DEVICE_FAMILY: "1"
